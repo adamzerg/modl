@@ -1,7 +1,4 @@
-
-
 swirl::install_course("The R Programming Environment")
-
 
 ## Entering Input, `<-` symbol is the assignment operator.
 x <- 1  ## nothing printed
@@ -24,7 +21,7 @@ y <- c(TRUE, 2)    ## numeric
 y <- c("a", TRUE)  ## character
 
 ## Matrices
-m <- matrix(1:6, nrow = 2, ncol = 3) 
+m <- matrix(1:6, nrow = 2, ncol = 3)
 m
 
 ## Matrices created directly from vectors
@@ -37,10 +34,10 @@ m
 x <- 1:3
 y <- 10:12
 cbind(x, y)
-rbind(x, y) 
+rbind(x, y)
 
 ## Lists are a special type of vector that can contain elements of different classes.
-x <- list(1, "a", TRUE, 1 + 4i) 
+x <- list(1, "a", TRUE, 1 + 4i)
 x
 
 ## Missing values, `NaN` value is also `NA` but the converse is not true
@@ -50,13 +47,11 @@ is.nan(x)
 
 ## Data Frames
 
-x <- data.frame(foo = 1:4, bar = c(T, T, F, F)) 
+x <- data.frame(foo = 1:4, bar = c(T, T, F, F))
 x
 
 ## Assign names to list
 x <- 1:3
 names(x)
-names(x) <- c("foo", "bar", "norf") 
+names(x) <- c("foo", "bar", "norf")
 names(x)
-
-

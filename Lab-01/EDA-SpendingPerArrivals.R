@@ -18,7 +18,6 @@ library(ggvis)
 install.packages("pacman")
 pacman::p_load(pacman, dplyr, GGally, ggplot2, ggthemes, ggvis, httr, lubridate, plotly, rio, rmarkdown, shiny, stringr, tidyr, gridExtra)
 
-
 # Ingest 1st data set
 
 if (!file.exists("visitorArrivals.xlsx")) {
