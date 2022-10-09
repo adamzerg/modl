@@ -44,91 +44,26 @@ while the total number of records can be reduced?
 
 ---
 
-### SQL Schema
-Table: StockPrice
+## 2. Sort subset for re-granular
 
-```postgresql
+### Data
 
-create table StockPrice (
-  datetime timestamp,
-  stock varchar,
-  price money
-);
+Please take the last result example from above as the data.
 
-insert into StockPrice values
-('2022-10-07 10:00','GOOGL',500),
-('2022-10-07 10:00','TSLA',500),
-('2022-10-07 11:00','GOOGL',500),
-('2022-10-07 11:00','TSLA',800),
-('2022-10-07 12:00','GOOGL',500),
-('2022-10-07 12:00','TSLA',800),
-('2022-10-07 13:00','GOOGL',800),
-('2022-10-07 13:00','TSLA',800),
-('2022-10-07 14:00','GOOGL',800),
-('2022-10-07 14:00','TSLA',800),
-('2022-10-07 15:00','GOOGL',500),
-('2022-10-07 15:00','TSLA',1200);
+### Problem
 
-```
+For each stock, can you find the price that has longest / shortest holding time?
+Note you might need to adjust back the last ending time above in each stock to 2022-10-07 15:59:59 first,
+so it reflect the actual time length of the price.
 
-### SQL Attempt
+### Example
 
-```postgresql
+---
 
-select *,
---Use LAG function to get the previous record's attribute (stock price in this case)
-lag(price) over (partition by stock order by stock, datetime) as prevprice
-into StockPriceSCD_10
-from StockPrice;
+| stock | firstprice | lastprice | shortestholdprice | longestholdprice |
+| ----- | ---------- | --------- | ----------------- | ---------------- |
+| GOOGL | $500.00    | $500.00   | $500.00           | $500.00          |
+| TSLA  | $500.00    | $1,200.00 | $500.00           | $800.00          |
 
-select * from StockPriceSCD_10;
+---
 
-select
-	stock,
-    price,
-    datetime as starttime,
-    --Use the LEAD Function to get the next record's datetime as EndTime.
-    lead(datetime,1,'3000-01-01') over (partition by stock order by stock, datetime) - time '00:00:00.001' as endtime
-into StockPriceSCD
-from StockPriceSCD_10
-where prevprice <> price or prevprice is null;
-	-- Keep only the necessary records (records which has changes, or first record of each stock)
-
-select * from StockPriceSCD;
-
-```
-
-### R Dataframe
-
-```r
-
-stock <- c('GOOGL','TSLA')
-datetime <- c('2022-10-07 10:00:00','2022-10-07 11:00:00','2022-10-07 12:00:00','2022-10-07 13:00:00','2022-10-07 14:00:00','2022-10-07 15:00:00')
-price <- c(500,500,500,800,500,800,800,800,800,800,500,1200)
-
-stockprice <-
-  cbind.data.frame(stock, datetime=rep(ymd_hms(datetime), each = length(stock)), price)
-
-summary(stockprice)
-
-```
-
-### R Attempt
-
-```r
-
-library(tidyverse)
-
-stockprice_scd <- 
-  stockprice %>%
-  group_by(stock) %>% # Set partition for lag / lead in the next
-  mutate(previous_price = lag(price, n = 1, order_by = datetime)) %>% # Find lag price
-  filter(previous_price != price | is.na(previous_price)) %>% # Where Clause
-  mutate(starttime = datetime,
-         endtime = replace_na(lead(datetime, n = 1, order_by = datetime), ymd('3000-01-01')) - hms('00:00:00.001')) %>% # Find lead time
-  select(stock, price, starttime, endtime) %>% # Reduce selected columns
-  arrange(stock, starttime) # Re-order
-
-stockprice_scd
-
-```
