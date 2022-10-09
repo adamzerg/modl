@@ -50,6 +50,16 @@ while the total number of records can be reduced?
 
 Please take the last result example from above as the data.
 
+| stock | price     | starttime                | endtime                  |
+| ----- | --------- | ------------------------ | ------------------------ |
+| GOOGL | $500.00   | 2022-10-07T10:00:00.000Z | 2022-10-07T12:59:59.999Z |
+| GOOGL | $800.00   | 2022-10-07T13:00:00.000Z | 2022-10-07T14:59:59.999Z |
+| GOOGL | $500.00   | 2022-10-07T15:00:00.000Z | **2022-10-07T15:59:59.999Z** |
+| TSLA  | $500.00   | 2022-10-07T10:00:00.000Z | 2022-10-07T10:59:59.999Z |
+| TSLA  | $800.00   | 2022-10-07T11:00:00.000Z | 2022-10-07T14:59:59.999Z |
+| TSLA  | $1,200.00 | 2022-10-07T15:00:00.000Z | **2022-10-07T15:59:59.999Z** |
+
+
 ### Problem
 
 For each stock, can you find the price that has longest / shortest holding time?
