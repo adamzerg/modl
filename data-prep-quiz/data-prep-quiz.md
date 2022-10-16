@@ -34,7 +34,7 @@ The query result format is in the following example.
 | GOOGL | 3                |
 | TSLA  | 4                |
 
-Explanation: 1 appears consecutively for three times, 2 for four times.
+Explanation: GOOGL appears consecutively for three times, TSLA for four times, where META less than three so no appearance.
 
 ---
 
