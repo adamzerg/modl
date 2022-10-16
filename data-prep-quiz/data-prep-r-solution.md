@@ -6,9 +6,9 @@
 ```r
 
 id <- 1:9
-num <- c(1,1,1,2,1,2,2,2,2)
+stock <- c('GOOGL','GOOGL','GOOGL','META','GOOGL','TSLA','TSLA','TSLA','TSLA')
 
-logs <- cbind.data.frame(id, num)
+logs <- cbind.data.frame(id, stock)
 
 summary(logs)
 
@@ -20,8 +20,8 @@ summary(logs)
 
 library(tidyverse)
 
-runlen <- rle(logs$num)
-df <- cbind.data.frame(num = runlen$values, consecutivecount = runlen$length)
+runlen <- rle(logs$stock)
+df <- cbind.data.frame(stock = runlen$values, consecutivecount = runlen$length)
 df %>% filter(consecutivecount >= 3)
 
 ```

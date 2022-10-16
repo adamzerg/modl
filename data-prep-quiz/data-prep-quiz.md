@@ -6,33 +6,33 @@
 ### Data
 ---
 
-| id  | num |
-| --- | --- |
-| 1   | 1   |
-| 2   | 1   |
-| 3   | 1   |
-| 4   | 2   |
-| 5   | 1   |
-| 6   | 2   |
-| 7   | 2   |
-| 8   | 2   |
-| 9   | 2   |
+| id  | stock |
+| --- | ----- |
+| 1   | GOOGL |
+| 2   | GOOGL |
+| 3   | GOOGL |
+| 4   | META  |
+| 5   | GOOGL |
+| 6   | TSLA  |
+| 7   | TSLA  |
+| 8   | TSLA  |
+| 9   | TSLA  |
 
 ---
 
 ### Problem
 
-Find all numbers that appear at least three times consecutively.
+Find all the stocks that appear at least three times consecutively.
 The query result format is in the following example.
 
 ### Example
 
 ---
 
-| num | consecutivecount |
-| --- | ---------------- |
-| 1   | 3                |
-| 2   | 4                |
+| stock | consecutivecount |
+| ----- | ---------------- |
+| GOOGL | 3                |
+| TSLA  | 4                |
 
 Explanation: 1 appears consecutively for three times, 2 for four times.
 

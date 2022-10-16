@@ -7,18 +7,18 @@ Table: Logs
 
 ```postgresql
 
-create table Logs (id int, num int);
+create table Logs (id int, stock varchar(50));
 
-insert into Logs (id, num) values
-('1', '1'),
-('2', '1'),
-('3', '1'),
-('4', '2'),
-('5', '1'),
-('6', '2'),
-('7', '2'),
-('8', '2'),
-('9', '2');
+insert into Logs (id, stock) values
+('1', 'GOOGL'),
+('2', 'GOOGL'),
+('3', 'GOOGL'),
+('4', 'META'),
+('5', 'GOOGL'),
+('6', 'TSLA'),
+('7', 'TSLA'),
+('8', 'TSLA'),
+('9', 'TSLA');
 
 ```
 
@@ -26,20 +26,20 @@ insert into Logs (id, num) values
 
 ```postgresql
 
-with recursive RLE(id, num, numCount) as (
-    select id, num, 1 numCount
+with recursive RLE(id, stock, numCount) as (
+    select id, stock, 1 numCount
     from Logs anchor
     where id = 1
     union all
-    select member.id, member.num, case when member.num = RLE.num then numCount + 1 else 1 end numCount
+    select member.id, member.stock, case when member.stock = RLE.stock then numCount + 1 else 1 end numCount
     from Logs member
     join RLE
     on member.id = RLE.id + 1
 )
-select num, max(numcount) consecutivecount
+select stock, max(numcount) consecutivecount
 from RLE
 where numCount >= 3
-group by num
+group by stock
 order by 1;
 
 ```
