@@ -1,7 +1,32 @@
 
 # Data Preparation Solution - R
 
-## R Dataframe
+## R Dataframe 1
+
+```r
+
+id <- 1:9
+num <- c(1,1,1,2,1,2,2,2,2)
+
+logs <- cbind.data.frame(id, num)
+
+summary(logs)
+
+```
+
+## R Answer 1
+
+```r
+
+library(tidyverse)
+
+runlen <- rle(logs$num)
+df <- cbind.data.frame(num = runlen$values, consecutivecount = runlen$length)
+df %>% filter(consecutivecount >= 3)
+
+```
+
+## R Dataframe 2
 
 ```r
 
@@ -16,7 +41,7 @@ summary(stockprice)
 
 ```
 
-## R Answer 1
+## R Answer 2
 
 ```r
 
@@ -37,7 +62,7 @@ stockprice_scd
 ```
 
 
-## R Answer 2
+## R Answer 3
 
 ```r
 

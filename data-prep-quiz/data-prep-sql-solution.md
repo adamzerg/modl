@@ -1,7 +1,50 @@
 
 # Data Preparation Solution - SQL
 
-## SQL Schema
+## SQL Schema 1
+
+Table: Logs
+
+```postgresql
+
+create table Logs (id int, num int);
+
+insert into Logs (id, num) values
+('1', '1'),
+('2', '1'),
+('3', '1'),
+('4', '2'),
+('5', '1'),
+('6', '2'),
+('7', '2'),
+('8', '2'),
+('9', '2');
+
+```
+
+## SQL Answer 1
+
+```postgresql
+
+with recursive RLE(id, num, numCount) as (
+    select id, num, 1 numCount
+    from Logs anchor
+    where id = 1
+    union all
+    select member.id, member.num, case when member.num = RLE.num then numCount + 1 else 1 end numCount
+    from Logs member
+    join RLE
+    on member.id = RLE.id + 1
+)
+select num, max(numcount) consecutivecount
+from RLE
+where numCount >= 3
+group by num
+order by 1;
+
+```
+
+## SQL Schema 2
 
 Table: StockPrice
 
@@ -29,7 +72,7 @@ insert into StockPrice values
 
 ```
 
-## SQL Answer 1
+## SQL Answer 2
 
 ```postgresql
 
@@ -56,8 +99,7 @@ select * from StockPriceSCD;
 
 ```
 
-
-## SQL Answer 2
+## SQL Answer 3
 
 ```postgresql
 

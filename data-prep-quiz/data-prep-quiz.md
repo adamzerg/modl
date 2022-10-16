@@ -1,7 +1,44 @@
 
 # Data Preparation Quiz
 
-## 1. Slowly Changing Dimension
+## 1. Consecutive count
+
+### Data
+---
+
+| id  | num |
+| --- | --- |
+| 1   | 1   |
+| 2   | 1   |
+| 3   | 1   |
+| 4   | 2   |
+| 5   | 1   |
+| 6   | 2   |
+| 7   | 2   |
+| 8   | 2   |
+| 9   | 2   |
+
+---
+
+### Problem
+
+Find all numbers that appear at least three times consecutively.
+The query result format is in the following example.
+
+### Example
+
+---
+
+| num | consecutivecount |
+| --- | ---------------- |
+| 1   | 3                |
+| 2   | 4                |
+
+Explanation: 1 appears consecutively for three times, 2 for four times.
+
+---
+
+## 2. Slowly Changing Dimension
 
 ### Data
 ---
@@ -44,7 +81,7 @@ while the total number of records can be reduced?
 
 ---
 
-## 2. Sort subset for re-granular
+## 3. Sort subset for re-granular
 
 ### Data
 
