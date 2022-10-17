@@ -4,7 +4,6 @@
 ## 1. Consecutive count
 
 ### Data
----
 
 | id  | stock |
 | --- | ----- |
@@ -18,16 +17,12 @@
 | 8   | TSLA  |
 | 9   | TSLA  |
 
----
-
 ### Problem
 
 Find all the stocks that appear at least three times consecutively.
 The query result format is in the following example.
 
 ### Example
-
----
 
 | stock | consecutivecount |
 | ----- | ---------------- |
@@ -36,12 +31,9 @@ The query result format is in the following example.
 
 Explanation: GOOGL appears consecutively for three times, TSLA for four times, where META less than three so no appearance.
 
----
-
 ## 2. Slowly Changing Dimension
 
 ### Data
----
 
 | datetime                 | stock | price     |
 | ------------------------ | ----- | --------- |
@@ -58,8 +50,6 @@ Explanation: GOOGL appears consecutively for three times, TSLA for four times, w
 | 2022-10-07T15:00:00.000Z | GOOGL | $500.00   |
 | 2022-10-07T15:00:00.000Z | TSLA  | $1,200.00 |
 
----
-
 ### Problem
 
 Given a dataset capturing stock price of google and tesla every hour.
@@ -67,8 +57,6 @@ Can you build a slowly changing dimension table, so it records time range for ea
 while the total number of records can be reduced?
 
 ### Example
-
----
 
 | stock | price     | starttime                | endtime                  |
 |-------|-----------|--------------------------|--------------------------|
@@ -78,8 +66,6 @@ while the total number of records can be reduced?
 | TSLA  | $500.00   | 2022-10-07T10:00:00.000Z | 2022-10-07T10:59:59.999Z |
 | TSLA  | $800.00   | 2022-10-07T11:00:00.000Z | 2022-10-07T14:59:59.999Z |
 | TSLA  | $1,200.00 | 2022-10-07T15:00:00.000Z | 2999-12-31T23:59:59.999Z |
-
----
 
 ## 3. Sort subset for re-granular
 
@@ -105,12 +91,8 @@ so it reflect the actual time length of the price.
 
 ### Example
 
----
-
 | stock | firstprice | lastprice | shortestholdprice | longestholdprice |
 | ----- | ---------- | --------- | ----------------- | ---------------- |
 | GOOGL | $500.00    | $500.00   | $500.00           | $500.00          |
 | TSLA  | $500.00    | $1,200.00 | $500.00           | $800.00          |
-
----
 
